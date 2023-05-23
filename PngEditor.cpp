@@ -22,20 +22,8 @@ bool PngEditor::insert_img(std::string baseImgPath, std::string insertedImgPath,
 	else {		
 		rgb8_view_t baseView = view(baseImg);
 		rgb8_view_t insertView = view(insertImg);
-		rgb8_loc_t baseLoc = baseView.xy_at(x, y);
-		rgb8_loc_t insertLoc = insertView.xy_at(0, 0);
 
-		for (int x = 0; x < insertView.width(); ++x) {
-			for (int y = 0; y < insertView.height(); ++y) {
-				*baseLoc = *insertLoc;
-				++baseLoc.y();
-				++insertLoc.y();
-			}
-			baseLoc += point_t(0, -insertView.height());
-			insertLoc += point_t(0, -insertView.height());
-			++baseLoc.x();
-			++insertLoc.x();
-		}
+		copy_pixels(insertView, subimage_view(baseView, x, y, insertView.width(), insertView.height()));
 
 		write_view("D:/Dev/dofus-image-breaking-enhancement/images/test.png", view(baseImg), png_tag());
 
