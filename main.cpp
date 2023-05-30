@@ -1,21 +1,19 @@
 ﻿#include "main.h"
-#include <boost/gil/extension/io/png.hpp>
 
-#include <boost/gil.hpp>
-#include <boost/gil/io/io.hpp>
-#include <boost/gil/image_view.hpp>
+#include <windows.h>
 
 #include "PngEditor.h"
+#include "utils/FileSystemUtil.h"
 
 using namespace std;
-using namespace boost::gil;
 
 int main()
 {
 	cout << "Hello CMake." << endl;
 
-	auto baseImgPath = "D:/Dev/dofus-image-breaking-enhancement/images/base.png";
-	auto insertImgPath = "D:/Dev/dofus-image-breaking-enhancement/images/insert.png";
+	auto baseImgPath = "../../../images/base.png";
+	auto insertImgPath = "../../../images/insert.png";
+	auto ateliersPath = "../../../images/ateliers";
 
-	PngEditor::insert_img(baseImgPath, insertImgPath, 200, 400);
+	PngEditor::create_atelier_img();
 }
