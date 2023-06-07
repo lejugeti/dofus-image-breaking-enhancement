@@ -54,15 +54,16 @@ void TextWriter::write() {
 	FT_Render_Glyph(face->glyph, FT_RENDER_MODE_NORMAL);
 
 	FT_Bitmap bpm = face->glyph->bitmap;
-	gray8_image_t img(bpm.width, bpm.rows);
-	gray8_view_t gray_view = view(img);
+	rgba8_image_t img(bpm.width, bpm.rows);
+	rgba8_view_t rgb_view = view(img);
 
 	for (int y = 0; y < bpm.rows; ++y) {
-		gray8_view_t::x_iterator col_iterator = gray_view.row_begin(y);
+		rgba8_view_t::x_iterator col_iterator = rgb_view.row_begin(y);
 
 		for (int x = 0; x < bpm.width; ++x) {
-			uint8_t val = bpm.buffer[x + y * bpm.width];
-			*col_iterator = gray8_pixel_t(val);
+			uint8_t gray_val = bpm.buffer[x + y * bpm.width];
+			uint8_t alpha = gray_val == 0 ? 0 : 255;
+			*col_iterator = rgba8_pixel_t(gray_val, gray_val, gray_val, alpha);
 			++col_iterator;
 		}
 	}
