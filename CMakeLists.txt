@@ -15,7 +15,7 @@ set(CMAKE_TOOLCHAIN_FILE "${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/scripts/buildsystems
 project ("dofus-image-breaking-enhancement")
 
 # Ajoutez une source à l'exécutable de ce projet.
-add_executable (dofus-image-breaking-enhancement "main.cpp" "main.h" "PngEditor.cpp" "PngEditor.h" "ImgTypeEnum.h" "ImgTypeEnum.cpp" "models/images/AtelierImg.h" "utils/FileSystemUtil.h" "utils/FileSystemUtil.cpp")
+add_executable (dofus-image-breaking-enhancement "main.cpp" "main.h" "PngEditor.cpp" "PngEditor.h" "ImgTypeEnum.h" "ImgTypeEnum.cpp" "models/images/AtelierImg.h" "utils/FileSystemUtil.h" "utils/FileSystemUtil.cpp" "TextWriter.cpp" "TextWriter.h")
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET dofus-image-breaking-enhancement PROPERTY CXX_STANDARD 20)
@@ -25,8 +25,8 @@ endif()
 find_package(PNG REQUIRED)
 target_link_libraries(dofus-image-breaking-enhancement PRIVATE PNG::PNG)
 
-find_path(PNGPP_INCLUDE_DIRS "png++/color.hpp")
-target_include_directories(dofus-image-breaking-enhancement PRIVATE ${PNGPP_INCLUDE_DIRS})
-
 find_package(Boost)
 include_directories(${Boost_INCLUDE_DIRS})
+
+find_package(Freetype REQUIRED)
+target_link_libraries(dofus-image-breaking-enhancement PRIVATE Freetype::Freetype) # since CMake 3.10

@@ -11,6 +11,7 @@
 #include <boost/gil/extension/numeric/sampler.hpp>
 
 #include "utils/FileSystemUtil.h"
+#include "TextWriter.h"
 
 using namespace boost::gil;
 namespace fs = std::filesystem;
@@ -114,6 +115,7 @@ bool PngEditor::create_atelier_img() {
 	read_and_convert_image(fenetre_brisage_path, fenetre_brisage, png_tag());
 
 	insert_random_object(&fenetre_brisage);
+	// TODO : insérer nom objet
 	insert_random_rune(&fenetre_brisage);
 	insert_img(&fenetre_brisage, &atelier, 321, 78);
 
@@ -123,4 +125,9 @@ bool PngEditor::create_atelier_img() {
 	std::string resultOutPath = "../../../images/out/atelier_entier_test.png";
 	write_png_img(&atelier, resultOutPath);
 	return true;
+}
+
+void PngEditor::test() {
+	TextWriter tw;
+
 }

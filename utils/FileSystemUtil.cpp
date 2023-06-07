@@ -21,6 +21,8 @@ std::string FileSystemUtil::get_random_file_path_from_dir(std::string dirPath) {
 		}
 		++fileIndex;
 	}
+
+	return nullptr;
 }
 
 int FileSystemUtil::count_files_in_dir(std::string dirPath) {

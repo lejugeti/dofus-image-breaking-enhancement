@@ -20,6 +20,7 @@ public:
 
 	static bool create_atelier_img();
 
+	static void test();
 private:
 	static std::string get_random_file_path_from_dir(std::string dirPath);
 };
