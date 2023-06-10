@@ -6,17 +6,23 @@
 #include "TextWriter.h"
 #include "utils/FileSystemUtil.h"
 
+#include <boost/gil.hpp>
+
 using namespace std;
+using namespace boost::gil;
 
 int main()
 {
-	cout << "Hello CMake." << endl;
+	auto output_path = "../../../images/out/";
 
-	auto baseImgPath = "../../../images/base.png";
-	auto insertImgPath = "../../../images/insert.png";
-	auto ateliersPath = "../../../images/ateliers";
+	int generation_number = 2;
+	cout << "Breaking image generator running" << endl;
+	cout << "Generations number = " << generation_number << endl;
 
-	//PngEditor::create_atelier_img();
-	TextWriter writer;
-	writer.write();
+	for (int gen_index = 0; gen_index < generation_number; ++gen_index) {
+		PngEditor::create_atelier_img(output_path + std::to_string(gen_index) + ".png");
+		cout << "\rAvancement : " << gen_index + 1 << " / " << generation_number;
+	}
+
+	cout << "\n\nGeneration terminee" << endl;
 }

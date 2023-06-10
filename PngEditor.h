@@ -10,17 +10,19 @@ using namespace boost::gil;
 class PngEditor
 {
 public:
-	static bool insert_img(std::string baseImgPath, std::string insertedImgPath, int x, int y);
-	static bool insert_img(rgba8_image_t* insert_img, rgba8_image_t* base_img, int x, int y);
-	static bool insert_random_object(rgba8_image_t* ihm_brisage_img);
-	static bool insert_random_rune(rgba8_image_t* ihm_brisage_img);
-	
-	static bool read_png_img(rgba8_image_t* img, std::string path);
-	static bool write_png_img(rgba8_image_t* png, std::string path);
+	static bool inserer_img(rgba8_image_t* insert_img, rgba8_image_t* base_img, int x, int y);
+	static bool inserer_objet_aleatoire(rgba8_image_t* ihm_brisage_img);
+	static bool inserer_rune_aleatoire(rgba8_image_t* ihm_brisage_img);
+	static bool inserer_coefficient_aleatoire(rgba8_image_t* ihm_brisage_img);
 
-	static bool create_atelier_img();
+	/// <summary>
+	/// Méthode permettant de créer de bout en bout une image similaire à un screen de brisage.
+	/// </summary>
+	/// <param name="output_path">Le chemin où écrire l'image de sortie</param>
+	/// <returns></returns>
+	static bool create_atelier_img(std::string output_path);
 
-	static void test();
 private:
-	static std::string get_random_file_path_from_dir(std::string dirPath);
+	static bool read_png_img(std::string path, rgba8_image_t* img);
+	static bool write_png_img(std::string path, rgba8_image_t* img);
 };
