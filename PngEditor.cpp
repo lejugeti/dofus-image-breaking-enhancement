@@ -40,7 +40,7 @@ bool PngEditor::inserer_img(rgba8_image_t* insert_img, rgba8_image_t* base_img, 
 	}
 }
 
-bool PngEditor::inserer_objet_aleatoire(rgba8_image_t* ihm_brisage_img) {
+bool PngEditor::inserer_objet_aleatoire(FenetreBrisageImg* ihm_brisage_img) {
 	std::string objet_path = FileSystemUtil::get_random_file_path_from_dir(objets_dir);
 
 	rgba8_image_t fond_brisage;
@@ -60,7 +60,7 @@ bool PngEditor::inserer_objet_aleatoire(rgba8_image_t* ihm_brisage_img) {
 	return true;
 }
 
-bool PngEditor::inserer_rune_aleatoire(rgba8_image_t* ihm_brisage_img) {
+bool PngEditor::inserer_rune_aleatoire(FenetreBrisageImg* ihm_brisage_img) {
 	std::string rune_path = FileSystemUtil::get_random_file_path_from_dir(rune_dir);
 
 	rgba8_image_t fond_brisage;
@@ -84,7 +84,7 @@ bool PngEditor::inserer_rune_aleatoire(rgba8_image_t* ihm_brisage_img) {
 	return true;
 }
 
-bool PngEditor::inserer_coefficient_aleatoire(rgba8_image_t* ihm_brisage_img) {
+bool PngEditor::inserer_coefficient_aleatoire(FenetreBrisageImg* ihm_brisage_img) {
 	TextWriter writer;
 	std::random_device rd;
 	std::default_random_engine gen(rd());
@@ -99,10 +99,10 @@ bool PngEditor::create_atelier_img(std::string output_path) {
 	using Pixel = rgba8_image_t::value_type;
 
 	std::string atelierPath = FileSystemUtil::get_random_file_path_from_dir(ateliers_dir);
-	rgba8_image_t atelier;
+	AtelierImg atelier;
 	read_png_img(atelierPath, &atelier);
 
-	rgba8_image_t fenetre_brisage;
+	FenetreBrisageImg fenetre_brisage;
 	read_png_img(fenetre_brisage_path, &fenetre_brisage);
 
 	inserer_objet_aleatoire(&fenetre_brisage);

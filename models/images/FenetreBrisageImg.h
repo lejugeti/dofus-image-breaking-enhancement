@@ -4,4 +4,4 @@
 
 using namespace boost::gil;
 
-class AtelierImg : public rgba8_image_t {};
+class FenetreBrisageImg : public rgba8_image_t {};
