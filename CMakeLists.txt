@@ -15,7 +15,7 @@ set(CMAKE_TOOLCHAIN_FILE "${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/scripts/buildsystems
 project ("dofus-image-breaking-enhancement")
 
 # Ajoutez une source à l'exécutable de ce projet.
-add_executable (dofus-image-breaking-enhancement "main.cpp" "main.h" "PngEditor.cpp" "PngEditor.h" "models/images/AtelierImg.h" "utils/FileSystemUtil.h" "utils/FileSystemUtil.cpp" "TextWriter.cpp" "TextWriter.h" "models/images/FenetreBrisageImg.h")
+add_executable (dofus-image-breaking-enhancement "main.cpp" "main.h" "PngEditor.cpp" "PngEditor.h" "models/images/AtelierImg.h" "utils/FileSystemUtil.h" "utils/FileSystemUtil.cpp" "TextWriter.cpp" "TextWriter.h" "models/images/FenetreBrisageImg.h" "LabelCreator.cpp" "LabelCreator.h" "models/labeling/dataset/DatasetLabel.h"  "models/labeling/images/RuneLabel.h" "models/labeling/images/Label.h" "models/labeling/images/FenetreBrisageLabel.h" "models/labeling/images/ObjetLabel.h" "models/labeling/dataset/DatasetType.h" "models/labeling/images/CoefficientLabel.h" "models/labeling/images/NormalizedLabel.h" "models/text/TextDimensions.h" "mappers/LabelMapper.h" "mappers/LabelMapper.cpp")
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET dofus-image-breaking-enhancement PROPERTY CXX_STANDARD 20)

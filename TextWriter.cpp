@@ -6,8 +6,9 @@
 #include <stdexcept>
 #include <iostream>
 
-using namespace std;
+#include "models/text/TextDimensions.h"
 
+using namespace std;
 
 TextWriter::TextWriter() {
 	FT_Error error = FT_Init_FreeType(&library);
@@ -16,7 +17,7 @@ TextWriter::TextWriter() {
 	}
 }
 
-void TextWriter::write_in_image(std::string texte, rgba8_image_t* img, int base_col, int base_ligne, int taille_pixel) {
+TextDimensions TextWriter::write_in_image(std::string texte, rgba8_image_t* img, int base_col, int base_ligne, int taille_pixel) {
 	FT_Face face;
 	FT_Error error;
 
@@ -38,6 +39,8 @@ void TextWriter::write_in_image(std::string texte, rgba8_image_t* img, int base_
 	}
 
 	rgba8_view_t rgb_view = view(*img);
+	int sum_width = 0;
+	int max_height = 0;
 
 	for (char character : texte) {
 		int glyph_index = FT_Get_Char_Index(face, character);
@@ -45,6 +48,11 @@ void TextWriter::write_in_image(std::string texte, rgba8_image_t* img, int base_
 		FT_Render_Glyph(face->glyph, FT_RENDER_MODE_NORMAL);
 
 		FT_Bitmap bpm = face->glyph->bitmap;
+		sum_width += bpm.width;
+		if (bpm.rows > max_height) {
+			max_height = bpm.rows;
+		}
+
 		int ligne_debut_ecriture = base_ligne - (face->glyph->metrics.horiBearingY >> 6); // on part de la ligne de base et on retranche le bearingY du caractère pour aligner
 
 		for (int row = 0; row < bpm.rows; ++row) {
@@ -60,4 +68,6 @@ void TextWriter::write_in_image(std::string texte, rgba8_image_t* img, int base_
 		}
 		base_col += face->glyph->advance.x >> 6;
 	}
+
+	return TextDimensions(sum_width, max_height);
 }
